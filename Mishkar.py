@@ -1,5 +1,5 @@
 import pygame
-class Miskar(object):
+class Mishkar(object):
 
     def __init__(self, x, y, width, height):
         self.x = x

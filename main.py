@@ -1,7 +1,7 @@
 import pygame
 import random
 import time
-from Miskar import Miskar
+from Mishkar import Mishkar
 
 pygame.init()
 
@@ -28,13 +28,13 @@ def movement(keyPressed):
 
 
 run = True
-Miskar=Miskar(100, 100, 50, 50)
+Mishkar=Mishkar(100, 100, 50, 50)
 
-Miskar.existance()
+Mishkar.existance()
 
 
 def redrawGameWindow():
-    Miskar.draw()
+    Mishkar.draw()
 
 while run:
     clock.tick(60)

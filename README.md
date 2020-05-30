@@ -1,7 +1,7 @@
-# MiskarGame
-Miskar the Germaphobe 
+# MishkarGame
+Mishkar the Germaphobe 
 
-Help Miskar remove the germ infested beasts from the town.
+Help Mishkar remove the germ infested beasts from the town.
 
 By Ioan Dascalu and Robert Melikyan
 
