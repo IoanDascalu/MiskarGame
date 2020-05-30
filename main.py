@@ -1,16 +1,19 @@
 import pygame
 import random
 import time
+
+from Item import Item
 from Mishkar import Mishkar
+from Beasts import Beasts
 
 pygame.init()
 
-screenWidth = 500
-screenHeight = 500
+screenWidth = 700
+screenHeight = 700
 win = pygame.display.set_mode((screenWidth, screenHeight))
 clock = pygame.time.Clock()
 
-pygame.display.set_caption("Miskar The Germaphobe")
+pygame.display.set_caption("Mishkar The Germaphobe")
 
 
 def movement(keyPressed):
@@ -28,13 +31,17 @@ def movement(keyPressed):
 
 
 run = True
-Mishkar=Mishkar(100, 100, 50, 50)
+Mishkar = Mishkar(100, 100, 50, 50, win)
+Apple = Item(100, 300, 512, 256, "MishkarBests/unicorn.png", "apple", win)
+
 
 Mishkar.existance()
 
 
 def redrawGameWindow():
     Mishkar.draw()
+    Apple.draw()
+    pygame.display.update()
 
 while run:
     clock.tick(60)
@@ -46,7 +53,8 @@ while run:
 
     keys = pygame.key.get_pressed()
     movement(keys)
+    redrawGameWindow()
 
-    
+
 
 pygame.quit()
