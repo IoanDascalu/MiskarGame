@@ -11,13 +11,14 @@ class Mishkar(object):
         self.height = height
         self.win = window
         self.health = 100
+        self.vel=3
         # self.inventory = Item.Item("MishkarBests/unicorn.png", "unicorn")
         self.left = True
         self.right = False
         self.up = False
         self.down = False
         self.standing = True
-        self.hitbox = (self.x, self.y - 2, 37, 55)
+        self.collisionbox = (self.x, self.y - 2, 37, 55)
 
     def existance(self):
         print("I exist")
@@ -26,11 +27,21 @@ class Mishkar(object):
         pass
 
     def draw(self):
-        self.hitbox = (self.x, self.y - 2, 37, 55)
-        pygame.draw.rect(self.win, (255, 0, 0), self.hitbox, 2)
+        self.collisionbox = (self.x, self.y - 2, 37, 55)
+        pygame.draw.rect(self.win, (255, 0, 0), self.collisionbox, 2)
 
-    def movement(self):
-        pass
+    def movement(self, keyPressed):
+
+        if keyPressed[pygame.K_LEFT]:
+            self.x -= self.vel
+        elif keyPressed[pygame.K_RIGHT]:
+            self.x += self.vel
+
+        elif keyPressed[pygame.K_DOWN]:
+            self.y += self.vel
+
+        elif keyPressed[pygame.K_UP]:
+            self.y -= self.vel
 
     def interact(self):
         pass

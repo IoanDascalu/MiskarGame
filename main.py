@@ -15,21 +15,6 @@ clock = pygame.time.Clock()
 
 pygame.display.set_caption("Mishkar The Germaphobe")
 
-
-def movement(keyPressed):
-    if keyPressed[pygame.K_LEFT]:
-        pass
-    elif keyPressed[pygame.K_RIGHT]:
-        pass
-
-    elif keyPressed[pygame.K_DOWN]:
-        pass
-
-    elif keyPressed[pygame.K_UP]:
-        print("up")
-    pass
-
-
 run = True
 Mishkar = Mishkar(100, 100, 50, 50, win)
 Apple = Item(100, 300, 512, 256, "MishkarBests/unicorn.png", "apple", win)
@@ -52,7 +37,9 @@ while run:
             run = False
 
     keys = pygame.key.get_pressed()
-    movement(keys)
+
+    Mishkar.movement(keys)
+
     redrawGameWindow()
 
 
