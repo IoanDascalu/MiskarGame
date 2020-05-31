@@ -3,7 +3,7 @@
  <editorsettings>
   <export target="../../../MishkarBG.csv" format="csv"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../Overworld.tsx"/>
+ <tileset firstgid="1" source="Overworld.tsx"/>
  <layer id="1" name="Base" width="50" height="50">
   <data encoding="csv">
 1,1,1,1,1201,1202,1283,1203,367,1073741865,365,366,367,284,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
