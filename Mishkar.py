@@ -22,7 +22,6 @@ class Mishkar(object):
         self.collision_box = Rect(self.x, self.y - 2, 37, 55)
         self.walkCount = 0
         self.collisionbox = (self.x, self.y - 2, 37, 55)
-        print(listOfFigures[0])
         self.downFig = [pygame.image.load(img) for img in listOfFigures[0]]
         self.upFig = [pygame.image.load(img) for img in listOfFigures[1]]
         self.leftFig = [pygame.image.load(img) for img in listOfFigures[2]]
@@ -35,20 +34,20 @@ class Mishkar(object):
         pass
 
     def draw(self):
-        if self.walkCount + 1 >= 60:
+        if self.walkCount + 1 >= 9:
             self.walkCount = 0
         if not self.standing:
             if self.left:
-                self.win.blit(self.leftFig[self.walkCount // len(self.leftFig)], (self.x, self.y))
+                self.win.blit(self.leftFig[self.walkCount // 2], (self.x, self.y))
                 self.walkCount += 1
             elif self.right:
-                self.win.blit(self.rightFig[self.walkCount // len(self.leftFig)], (self.x, self.y))
+                self.win.blit(self.rightFig[self.walkCount // 2], (self.x, self.y))
                 self.walkCount += 1
             elif self.up:
-                self.win.blit(self.upFig[self.walkCount // len(self.leftFig)], (self.x, self.y))
+                self.win.blit(self.upFig[self.walkCount // 2], (self.x, self.y))
                 self.walkCount += 1
             elif self.down:
-                self.win.blit(self.downFig[self.walkCount // len(self.leftFig)], (self.x, self.y))
+                self.win.blit(self.downFig[self.walkCount // 2], (self.x, self.y))
                 self.walkCount += 1
         # else:
         elif self.standing:
