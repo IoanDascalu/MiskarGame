@@ -1,4 +1,5 @@
 import pygame
+from GameFunctions import Rect
 import Item
 
 
@@ -11,14 +12,14 @@ class Mishkar(object):
         self.height = height
         self.win = window
         self.health = 100
-        self.vel=5
+        self.vel = 5
         # self.inventory = Item.Item("MishkarBests/unicorn.png", "unicorn")
         self.left = True
         self.right = False
         self.up = False
         self.down = False
         self.standing = True
-        self.collisionbox = (self.x, self.y - 2, 37, 55)
+        self.collision_box = Rect(self.x, self.y - 2, 37, 55)
 
     def existance(self):
         print("I exist")
@@ -27,8 +28,8 @@ class Mishkar(object):
         pass
 
     def draw(self):
-        self.collisionbox = (self.x, self.y - 2, 37, 55)
-        pygame.draw.rect(self.win, (255, 0, 0), self.collisionbox, 2)
+        self.collision_box = (self.x, self.y - 2, 37, 55)
+        pygame.draw.rect(self.win, (255, 0, 0), self.collision_box, 2)
 
     def movement(self, keyPressed):
 

@@ -18,7 +18,7 @@ pygame.display.set_caption("Mishkar The Germaphobe")
 
 run = True
 Mishkar = Mishkar(100, 100, 50, 50, win)
-# Apple = Item(100, 300, 512, 256, "MishkarBests/unicorn.png", "apple", win)
+Apple = Item(100, 300, 512, 256, "MishkarBests/unicorn.png", "apple", win)
 tmx_data = load_pygame("Maps/MishkarBG.tmx")
 
 image = tmx_data.get_tile_image(0, 0, 0)
@@ -34,7 +34,7 @@ def redrawGameWindow():
             if tile is not None:
                 win.blit(tile, (x * tmx_data.tilewidth, y * tmx_data.tileheight))
     Mishkar.draw()
-    # Apple.draw()
+    Apple.draw()
     pygame.display.update()
 
 
