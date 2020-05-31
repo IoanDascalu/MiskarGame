@@ -1,21 +1,33 @@
 import pygame
 import os
 
+
 def loadImages(path):
     a = os.listdir(path + '/Down')
+    if '.DS_Store' in a:
+        a.pop(a.index('.DS_Store'))
     a.sort()
     down = [path + '/Down/' + img for img in a]
+
     b = os.listdir(path + '/Up')
+    if '.DS_Store' in b:
+        b.pop(b.index('.DS_Store'))
     b.sort()
     up = [path + '/Up/' + img for img in b]
+
     c = os.listdir(path + '/Left')
+    if '.DS_Store' in c:
+        c.pop(c.index('.DS_Store'))
     c.sort()
     left = [path + '/Left/' + img for img in c]
+
     d = os.listdir(path + '/Right')
+    if '.DS_Store' in d:
+        d.pop(d.index('.DS_Store'))
     d.sort()
     right = [path + '/Right/' + img for img in d]
-    ret = [down, up, left, right]
-    return ret
+
+    return [down, up, left, right]
 
 
 class Rect:

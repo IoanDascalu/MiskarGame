@@ -12,7 +12,7 @@ class Mishkar(object):
         self.height = height
         self.win = window
         self.health = 100
-        self.vel=5
+        self.vel = 5
         # self.inventory = Item.Item("MishkarBests/unicorn.png", "unicorn")
         self.facing = 'Down'
         self.currDir = 'Stand'
