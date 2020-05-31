@@ -234,3 +234,68 @@ def isTriangleCollision(object1, object2):
                     return True
 
     return False
+
+def isTriangleCollision(object1, object2):
+    '''
+    checks if Mishkar has made contact with any triangular objects
+    :param object1: Mishkar
+    :param object2: a triangle
+    :return:
+    '''
+
+    hitbox = object1 #.collision_box
+    hitbox_points = hitbox.get_points()
+    tri_points = object2.get_points()
+    for point in hitbox_points:
+        x = point[0]
+        y = point[1]
+        line1_slope = (tri_points[1][1]-tri_points[0][1])/\
+                      (tri_points[1][0]-tri_points[0][0])
+        line2_slope = (tri_points[2][1]-tri_points[0][1])/\
+                      (tri_points[2][0]-tri_points[0][0])
+
+        if object2.currDir is "Up":
+            if tri_points[1][1] <= y <= tri_points[0][1]:
+                x_min = (y - tri_points[0][1])/line1_slope + tri_points[0][0]
+                x_max = (y - tri_points[0][1])/line2_slope + tri_points[0][0]
+                if x_min <= x <= x_max:
+                    return True
+            for tri_point in tri_points:
+                if object1.x <= tri_point[0] <= object1.x + object1.width and \
+                        object1.y <= tri_point[1] <= object1.y + object1.height:
+                    return True
+
+        if object2.currDir is "Down":
+            if tri_points[0][1] <= y <= tri_points[1][1]:
+                x_max = (y - tri_points[0][1]) / line1_slope + tri_points[0][0]
+                x_min = (y - tri_points[0][1]) / line2_slope + tri_points[0][0]
+                if x_min <= x <= x_max:
+                    return True
+            for tri_point in tri_points:
+                if object1.x <= tri_point[0] <= object1.x + object1.width and \
+                        object1.y <= tri_point[1] <= object1.y + object1.height:
+                    return True
+
+        if object2.currDir is "Left":
+            if tri_points[1][0] <= x <= tri_points[0][0]:
+                y_min = (x - tri_points[0][0]) * line1_slope + tri_points[0][1]
+                y_max = (x - tri_points[0][0]) * line2_slope + tri_points[0][1]
+                if y_min <= x <= y_max:
+                    return True
+            for tri_point in tri_points:
+                if object1.x <= tri_point[0] <= object1.x + object1.width and \
+                        object1.y <= tri_point[1] <= object1.y + object1.height:
+                    return True
+
+        if object2.currDir is "Right":
+            if tri_points[0][0] <= x <= tri_points[1][0]:
+                y_max = (x - tri_points[0][0]) * line1_slope + tri_points[0][1]
+                y_min = (x - tri_points[0][0]) * line2_slope + tri_points[0][1]
+                if y_min <= x <= y_max:
+                    return True
+            for tri_point in tri_points:
+                if object1.x <= tri_point[0] <= object1.x + object1.width and \
+                        object1.y <= tri_point[1] <= object1.y + object1.height:
+                    return True
+
+    return False

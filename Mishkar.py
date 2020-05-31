@@ -70,17 +70,17 @@ class Mishkar(object):
             self.currDir = 'Left'
             self.facing = 'Left'
 
-        elif keyPressed[pygame.K_RIGHT]:
+        elif keyPressed[pygame.K_RIGHT] and self.voidDir is not 'Right':
             self.x += self.vel
             self.currDir = 'Right'
             self.facing = 'Right'
 
-        elif keyPressed[pygame.K_UP]:
+        elif keyPressed[pygame.K_UP] and self.voidDir is not 'Up':
             self.y -= self.vel
             self.currDir = 'Up'
             self.facing = 'Up'
 
-        elif keyPressed[pygame.K_DOWN]:
+        elif keyPressed[pygame.K_DOWN] and self.voidDir is not "Down":
             self.y += self.vel
             self.currDir = 'Down'
             self.facing = 'Down'
