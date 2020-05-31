@@ -1,5 +1,6 @@
 import pygame
 import Item
+from GameFunctions import Rect
 
 
 class Mishkar(object):

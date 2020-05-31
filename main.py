@@ -3,6 +3,7 @@ from pytmx import load_pygame
 import random
 import time
 
+import GameFunctions
 from Item import Item
 from Mishkar import Mishkar
 from Beasts import Beasts
