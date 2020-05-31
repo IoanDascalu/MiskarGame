@@ -49,25 +49,25 @@ class Rect:
         return [self.x, self.y, self.width, self.height]
 
 class Triangle:
-    def __init__(self, x, y, width, height, currDir):
+    def __init__(self, x, y, width, height, facing):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
-        self.currDir = currDir
+        self.facing = facing
 
     def get_points(self):
         point1 = (self.x, self.y)
-        if self.currDir is "Up":
+        if self.facing is "Up":
             point2 = (self.x - self.width/2, self.y - self.height)
             point3 = (self.x + self.width/2, self.y - self.height)
-        if self.currDir is "Down":
+        if self.facing is "Down":
             point2 = (self.x + self.width/2, self.y + self.height)
             point3 = (self.x - self.width/2, self.y + self.height)
-        if self.currDir is "Left":
+        if self.facing is "Left":
             point2 = (self.x - self.height, self.y + self.width/2)
             point3 = (self.x - self.height, self.y - self.width/2)
-        if self.currDir is "Right":
+        if self.facing is "Right":
             point2 = (self.x + self.height, self.y - self.width/2)
             point3 = (self.x + self.height, self.y + self.width/2)
 
@@ -75,6 +75,11 @@ class Triangle:
 
     def get_triangle(self):
         return [self.x, self.y, self.width, self.height]
+
+    def movement_update(self, x, y, facing):
+        self.x = x
+        self.y = y
+        self.facing = facing
 
 
 def isCollision(object1, object2):
