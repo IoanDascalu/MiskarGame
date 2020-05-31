@@ -149,6 +149,7 @@ def collisionToBe(object1, object2):
     try:
         object1.vel
         ob1_has_vel = True
+
     except:
         ob1_has_vel = False
     try:
@@ -161,35 +162,92 @@ def collisionToBe(object1, object2):
             rect2b1 = Rect(object1.x, object1.y - object1.vel,
                            object1.width, object1.height)
         if object2.currDir is "Down":
-            rect2b1 = Rect(object1.x, object1.y + object1.vel,
-                           object1.width, object1.height)
+            rect2b1 = Rect(object1.x, object1.y,
+                           object1.width, object1.height + object1.vel)
         if object2.currDir is "Left":
             rect2b1 = Rect(object1.x - object1.vel, object1.y,
                            object1.width, object1.height)
         if object2.currDir is "Right":
-            rect2b1 = Rect(object1.x - object1.vel, object1.y,
-                           object1.width, object1.height)
+            rect2b1 = Rect(object1.x, object1.y,
+                           object1.width  + object1.vel, object1.height)
 
     else:
         rect2b1 = Rect(object1.x, object1.y,
                        object1.width, object1.height)
     if ob2_has_vel:
         if object2.currDir is "Up":
-            rect2b1 = Rect(object1.x, object1.y - object1.vel,
-                           object1.width, object1.height)
+            rect2b2 = Rect(object2.x, object2.y - object2.vel,
+                           object2.width, object2.height)
         if object2.currDir is "Down":
-            rect2b1 = Rect(object1.x, object1.y + object1.vel,
-                           object1.width, object1.height)
+            rect2b2 = Rect(object2.x, object2.y,
+                           object2.width, object2.height + object2.vel)
         if object2.currDir is "Left":
-            rect2b1 = Rect(object1.x - object1.vel, object1.y,
-                           object1.width, object1.height)
+            rect2b2 = Rect(object2.x - object2.vel, object2.y,
+                           object2.width, object2.height)
         if object2.currDir is "Right":
-            rect2b1 = Rect(object1.x - object1.vel, object1.y,
-                           object1.width, object1.height)
+            rect2b2 = Rect(object2.x, object2.y,
+                           object2.width + object2.vel, object2.height)
     else:
         rect2b2 = Rect(object2.x, object2.y,
                        object2.width, object2.height)
     return isCollision(rect2b1, rect2b2)
+
+
+def collisionToBeCollisionBox(object1, object2):
+    ob1_has_vel = False
+    ob2_has_vel = False
+    try:
+        object1.vel
+        ob1_has_vel = True
+
+    except:
+        ob1_has_vel = False
+    try:
+        object2.vel
+        ob2_has_vel = True
+    except:
+        ob2_has_vel = False
+    if ob1_has_vel and object1.currDir is not "Stand":
+        if object1.currDir is "Up":
+            rect2b1 = Rect(object1.getCollisionBox().x, object1.getCollisionBox().y - object1.vel,
+                           object1.getCollisionBox().width, object1.getCollisionBox().height)
+        if object1.currDir is "Down":
+            rect2b1 = Rect(object1.getCollisionBox().x, object1.getCollisionBox().y,
+                           object1.getCollisionBox().width, object1.getCollisionBox().height + object1.vel)
+        if object1.currDir is "Left":
+            rect2b1 = Rect(object1.getCollisionBox().x - object1.vel, object1.getCollisionBox().y,
+                           object1.getCollisionBox().width, object1.getCollisionBox().height)
+        if object1.currDir is "Right":
+            rect2b1 = Rect(object1.getCollisionBox().x, object1.getCollisionBox().y,
+                           object1.getCollisionBox().width + object1.vel, object1.getCollisionBox().height)
+
+    else:
+        rect2b1 = Rect(object1.getCollisionBox().x, object1.getCollisionBox().y,
+                       object1.getCollisionBox().width, object1.getCollisionBox().height)
+    if ob2_has_vel and object2.currDir is not "Stand":
+        if object2.currDir is "Up":
+            rect2b2 = Rect(object2.getCollisionBox().x, object2.getCollisionBox().y - object2.vel,
+                           object2.getCollisionBox().width, object2.getCollisionBox().height)
+        if object2.currDir is "Down":
+            rect2b2 = Rect(object2.getCollisionBox().x, object2.getCollisionBox().y,
+                           object2.getCollisionBox().width, object2.getCollisionBox().height + object2.vel)
+        if object2.currDir is "Left":
+            rect2b2 = Rect(object2.getCollisionBox().x - object2.vel, object2.getCollisionBox().y,
+                           object2.getCollisionBox().width, object2.getCollisionBox().height)
+        if object2.currDir is "Right":
+            rect2b2 = Rect(object2.getCollisionBox().x, object2.getCollisionBox().y,
+                           object2.getCollisionBox().width + object2.vel, object2.getCollisionBox().height)
+
+    else:
+        rect2b2 = Rect(object2.getCollisionBox().x, object2.getCollisionBox().y,
+                       object2.getCollisionBox().width, object2.getCollisionBox().height)
+    # pygame.draw.rect(object1.win, (255, 0, 0), rect2b1.get_rect(), 0)
+    # pygame.draw.rect(object2.win, (255, 0, 0), rect2b2.get_rect(), 0)
+    # pygame.display.update()
+
+    # object1.collision_box = rect2b1
+    return isCollision(rect2b1, rect2b2), rect2b1, rect2b2
+
 
 def isTriangleCollision(object1, object2):
     '''
