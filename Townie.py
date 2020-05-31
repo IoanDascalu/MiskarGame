@@ -1,9 +1,14 @@
 import pygame
 import Item
+import random
 from GameFunctions import Rect
+import pygame
+import Item
+from GameFunctions import Rect
+import GameFunctions
 
 
-class Mishkar(object):
+class Townie(object):
 
     def __init__(self, x, y, width, height, listOfFigures, window):
         self.x = x
@@ -11,10 +16,8 @@ class Mishkar(object):
         self.width = width
         self.height = height
         self.win = window
-        self.health = 100
-        self.vel = 5
-        # self.inventory = Item.Item("MishkarBests/unicorn.png", "unicorn")
-        self.collision_box = Rect(self.x+12, self.y+5, 38, 60)
+        self.vel = 3
+        self.collision_box = Rect(self.x+30, self.y+5, 38, 60)
         self.walkCount = 0
         self.facing = 'Down'
         self.currDir = 'Stand'
@@ -22,28 +25,23 @@ class Mishkar(object):
         self.upFig = [pygame.image.load(img) for img in listOfFigures[1]]
         self.leftFig = [pygame.image.load(img) for img in listOfFigures[2]]
         self.rightFig = [pygame.image.load(img) for img in listOfFigures[3]]
-
-    def existance(self):
-        print("I exist")
-
-    def inventory(self):
-        pass
+        self.stepCount = 0
 
     def draw(self):
-        if self.walkCount + 1 >= 18:
+        if self.walkCount + 1 >= 30:
             self.walkCount = 0
         if self.currDir is not 'Stand':
             if self.currDir is 'Left':
-                self.win.blit(self.leftFig[self.walkCount // 2], (self.x, self.y))
+                self.win.blit(self.leftFig[self.walkCount // 10], (self.x, self.y))
                 self.walkCount += 1
             elif self.currDir is 'Right':
-                self.win.blit(self.rightFig[self.walkCount // 2], (self.x, self.y))
+                self.win.blit(self.rightFig[self.walkCount // 10], (self.x, self.y))
                 self.walkCount += 1
             elif self.currDir is 'Up':
-                self.win.blit(self.upFig[self.walkCount // 2], (self.x, self.y))
+                self.win.blit(self.upFig[self.walkCount // 10], (self.x, self.y))
                 self.walkCount += 1
             elif self.currDir is 'Down':
-                self.win.blit(self.downFig[self.walkCount // 2], (self.x, self.y))
+                self.win.blit(self.downFig[self.walkCount // 10], (self.x, self.y))
                 self.walkCount += 1
         # else:
         elif self.currDir is 'Stand':
@@ -70,33 +68,43 @@ class Mishkar(object):
                 self.win.blit(self.downFig[self.walkCount // len(self.leftFig)], (self.x, self.y))
                 self.walkCount += 1
 
-        self.collision_box = Rect(self.x+12, self.y+5, 38, 60)
+        self.collision_box = Rect(self.x+5, self.y+10, 36, 58)
         hit_box = self.collision_box.get_rect()
         pygame.draw.rect(self.win, (255, 0, 0), hit_box, 2)
 
-    def movement(self, keyPressed):
+    def movement(self):
 
-        if keyPressed[pygame.K_LEFT]:
+        if self.stepCount != 0:
+            # if not GameFunctions.collisionToBe(self, Mishkar)
+            pass
+        else:
+            self.stepCount = random.randrange(10, 30)
+            ranDir = random.randrange(0,5)
+            possibleDir = ['Left', 'Right', 'Up', 'Down', 'Stand']
+            self.currDir = possibleDir[ranDir]
+
+        if self.currDir is 'Left':
+            self.stepCount -= 1
             self.x -= self.vel
-            self.currDir = 'Left'
             self.facing = 'Left'
 
-        elif keyPressed[pygame.K_RIGHT]:
+        elif self.currDir is 'Right':
+            self.stepCount -= 1
             self.x += self.vel
-            self.currDir = 'Right'
             self.facing = 'Right'
 
-        elif keyPressed[pygame.K_UP]:
+        elif self.currDir is 'Up':
+            self.stepCount -= 1
             self.y -= self.vel
-            self.currDir = 'Up'
             self.facing = 'Up'
 
-        elif keyPressed[pygame.K_DOWN]:
+        elif self.currDir is 'Down':
+            self.stepCount -= 1
             self.y += self.vel
-            self.currDir = 'Down'
             self.facing = 'Down'
 
         else:
+            self.stepCount -= 1
             self.currDir = 'Stand'
 
     def interact(self):
