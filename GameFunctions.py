@@ -157,14 +157,35 @@ def collisionToBe(object1, object2):
     except:
         ob2_has_vel = False
     if ob1_has_vel:
-        rect2b1 = Rect(object1.x + object1.vel, object1.y + object1.vel,
-                       object1.width, object1.height)
+        if object2.currDir is "Up":
+            rect2b1 = Rect(object1.x, object1.y - object1.vel,
+                           object1.width, object1.height)
+        if object2.currDir is "Down":
+            rect2b1 = Rect(object1.x, object1.y + object1.vel,
+                           object1.width, object1.height)
+        if object2.currDir is "Left":
+            rect2b1 = Rect(object1.x - object1.vel, object1.y,
+                           object1.width, object1.height)
+        if object2.currDir is "Right":
+            rect2b1 = Rect(object1.x - object1.vel, object1.y,
+                           object1.width, object1.height)
+
     else:
         rect2b1 = Rect(object1.x, object1.y,
                        object1.width, object1.height)
     if ob2_has_vel:
-        rect2b2 = Rect(object2.x + object2.vel, object2.y + object2.vel,
-                       object2.width, object2.height)
+        if object2.currDir is "Up":
+            rect2b1 = Rect(object1.x, object1.y - object1.vel,
+                           object1.width, object1.height)
+        if object2.currDir is "Down":
+            rect2b1 = Rect(object1.x, object1.y + object1.vel,
+                           object1.width, object1.height)
+        if object2.currDir is "Left":
+            rect2b1 = Rect(object1.x - object1.vel, object1.y,
+                           object1.width, object1.height)
+        if object2.currDir is "Right":
+            rect2b1 = Rect(object1.x - object1.vel, object1.y,
+                           object1.width, object1.height)
     else:
         rect2b2 = Rect(object2.x, object2.y,
                        object2.width, object2.height)
