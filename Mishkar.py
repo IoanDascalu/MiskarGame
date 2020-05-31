@@ -61,29 +61,29 @@ class Mishkar(object):
 
         self.collision_box = Rect(self.x+12, self.y+5, 38, 60)
         hit_box = self.collision_box.get_rect()
-        pygame.draw.rect(self.win, (255, 0, 0), hit_box, 2)
+        # pygame.draw.rect(self.win, (255, 0, 0), hit_box, 2)
 
     def movement(self, keyPressed):
 
         if keyPressed[pygame.K_LEFT] and self.voidDir is not 'Left':
-            self.x -= self.vel
             self.currDir = 'Left'
             self.facing = 'Left'
+            self.x -= self.vel
 
-        elif keyPressed[pygame.K_RIGHT]:
-            self.x += self.vel
+        elif keyPressed[pygame.K_RIGHT] and self.voidDir is not 'Right':
             self.currDir = 'Right'
             self.facing = 'Right'
+            self.x += self.vel
 
-        elif keyPressed[pygame.K_UP]:
-            self.y -= self.vel
+        elif keyPressed[pygame.K_UP] and self.voidDir is not 'Up':
             self.currDir = 'Up'
             self.facing = 'Up'
+            self.y -= self.vel
 
-        elif keyPressed[pygame.K_DOWN]:
-            self.y += self.vel
+        elif keyPressed[pygame.K_DOWN] and self.voidDir is not "Down":
             self.currDir = 'Down'
             self.facing = 'Down'
+            self.y += self.vel
 
         else:
             self.currDir = 'Stand'
@@ -99,3 +99,13 @@ class Mishkar(object):
 
     def getCollisionBox(self):
         return self.collision_box
+
+    def updateDir(self, keyPressed):
+        if keyPressed[pygame.K_LEFT]:
+            self.currDir = 'Left'
+        elif keyPressed[pygame.K_RIGHT]:
+            self.currDir = 'Right'
+        elif keyPressed[pygame.K_UP]:
+            self.currDir = 'Up'
+        elif keyPressed[pygame.K_DOWN]:
+            self.currDir = 'Down'

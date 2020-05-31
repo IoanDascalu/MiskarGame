@@ -20,6 +20,7 @@ class Townie(object):
         self.walkCount = 0
         self.facing = 'Down'
         self.currDir = 'Stand'
+        self.voidDir = ''
         self.downFig = [pygame.image.load(img) for img in listOfFigures[0]]
         self.upFig = [pygame.image.load(img) for img in listOfFigures[1]]
         self.leftFig = [pygame.image.load(img) for img in listOfFigures[2]]
@@ -71,8 +72,8 @@ class Townie(object):
 
         self.collision_box = Rect(self.x+5, self.y+10, 36, 58)
         hit_box = self.collision_box.get_rect()
-        pygame.draw.rect(self.win, (255, 0, 0), hit_box, 2)
         pygame.draw.polygon(self.win, (255, 255, 255), self.triangle.get_points(), 0)
+        # pygame.draw.rect(self.win, (255, 0, 0), hit_box, 2)
 
     def movement(self):
 
@@ -85,26 +86,26 @@ class Townie(object):
             possibleDir = ['Left', 'Right', 'Up', 'Down', 'Stand']
             self.currDir = possibleDir[ranDir]
 
-        if self.currDir is 'Left':
+        if self.currDir is 'Left' and self.voidDir is not 'Left':
             self.stepCount -= 1
             self.x -= self.vel
             self.facing = 'Left'
             self.triangle.movement_update(self.x + self.triangle_offset[0], self.y + self.triangle_offset[1],
                                           self.facing)
 
-        elif self.currDir is 'Right':
+        elif self.currDir is 'Right' and self.voidDir is not 'Right':
             self.stepCount -= 1
             self.x += self.vel
             self.facing = 'Right'
             self.triangle.movement_update(self.x + self.triangle_offset[0], self.y + self.triangle_offset[1],
                                           self.facing)
-        elif self.currDir is 'Up':
+        elif self.currDir is 'Up' and self.voidDir is not 'Up':
             self.stepCount -= 1
             self.y -= self.vel
             self.facing = 'Up'
             self.triangle.movement_update(self.x + self.triangle_offset[0], self.y + self.triangle_offset[1],
                                           self.facing)
-        elif self.currDir is 'Down':
+        elif self.currDir is 'Down' and self.voidDir is not 'Down':
             self.stepCount -= 1
             self.y += self.vel
             self.facing = 'Down'

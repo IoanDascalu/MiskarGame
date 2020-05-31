@@ -20,7 +20,7 @@ pygame.display.set_caption("Mishkar The Germaphobe")
 
 run = True
 Mishkar = Mishkar(300, 300, 38, 60, GameFunctions.loadImages('MishkarBests/CharSprites/MishkarSprite'), win)
-Fredrick = Townie(600, 400, 36, 58, GameFunctions.loadImages('MishkarBests/CharSprites/SheepMenSprites'), win)
+Fredrick = Townie(400, 400, 36, 58, GameFunctions.loadImages('MishkarBests/CharSprites/SheepMenSprites'), win)
 Bucket = Item(500, 500, 32, 32, 'MishkarBests/GameSprites/bucket/WaterBucket.png', 'Bucket', win)
 tmx_data = load_pygame("Maps/MishkarBG.tmx")
 
@@ -55,15 +55,18 @@ while run:
     if keys[pygame.K_ESCAPE]:
         break
 
-    Mishkar.movement(keys)
-
-    Fredrick.movement()
-
     Mishkar.interact(Bucket, keys)
-    if GameFunctions.isCollisionCollisionBox(Mishkar, Fredrick):
+    Mishkar.updateDir(keys)
+    collision, rect2b1, rect2b2 = GameFunctions.collisionToBeCollisionBox(Mishkar, Fredrick)
+    if collision:
         Mishkar.voidDir = Mishkar.facing
+        Fredrick.voidDir = Fredrick.facing
     else:
-        Mishkar.voidDir=''
+        Mishkar.voidDir = ''
+        Fredrick.voidDir = ''
+
+    Mishkar.movement(keys)
+    Fredrick.movement()
 
     redrawGameWindow()
 
