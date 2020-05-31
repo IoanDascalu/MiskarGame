@@ -52,4 +52,4 @@ def isCollision(object1, object2):
     return collision
 
 def collisionToBe(object1, object2):
-
+    return
