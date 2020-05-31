@@ -110,6 +110,39 @@ def isCollision(object1, object2):
     return collision
 
 
+def isCollisionCollisionBox(object1, object2):
+    '''
+    Check for collision (Positional overlap) between two objects
+    :param object1: Any object with spacial data that corresponds to x,y,w,h
+    :param object2: Any object with spacial data that corresponds to x,y,w,h
+    :return: Boolean if collision
+    '''
+
+    collision = False
+    rect1 = Rect(object1.getCollisionBox().x, object1.getCollisionBox().y, object1.getCollisionBox().width, object1.getCollisionBox().height)
+    rect2 = Rect(object2.getCollisionBox().x, object2.getCollisionBox().y, object2.getCollisionBox().width, object2.getCollisionBox().height)
+    rp1 = rect1.get_points()
+    rp2 = rect2.get_points()
+
+    for i, point in enumerate(rp1):
+        x1 = point[0]
+        y1 = point[1]
+        x2 = rp2[i][0]
+        y2 = rp2[i][1]
+        between_rect2x = rect2.x <= x1 <= rect2.x + rect2.width
+        between_rect1x = rect1.x <= x2 <= rect1.x + rect1.width
+        between_rect2y = rect2.y <= y1 <= rect2.y + rect2.height
+        between_rect1y = rect1.y <= y2 <= rect1.y + rect1.height
+
+        collision = (between_rect2x and between_rect2y) or \
+                    (between_rect1x and between_rect1y)
+
+        if collision is True:
+            return collision
+
+    return collision
+
+
 def collisionToBe(object1, object2):
     ob1_has_vel = False
     ob2_has_vel = False

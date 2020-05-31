@@ -1,5 +1,6 @@
 import pygame
 import Item
+import GameFunctions
 from GameFunctions import Rect
 
 
@@ -18,6 +19,7 @@ class Mishkar(object):
         self.walkCount = 0
         self.facing = 'Down'
         self.currDir = 'Stand'
+        self.voidDir = ''
         self.downFig = [pygame.image.load(img) for img in listOfFigures[0]]
         self.upFig = [pygame.image.load(img) for img in listOfFigures[1]]
         self.leftFig = [pygame.image.load(img) for img in listOfFigures[2]]
@@ -33,16 +35,16 @@ class Mishkar(object):
         if self.walkCount + 1 >= 18:
             self.walkCount = 0
         if self.currDir is not 'Stand':
-            if self.currDir is 'Left':
+            if self.currDir is 'Left' and self.voidDir is not 'Left':
                 self.win.blit(self.leftFig[self.walkCount // 2], (self.x, self.y))
                 self.walkCount += 1
-            elif self.currDir is 'Right':
+            elif self.currDir is 'Right' and self.voidDir is not 'Right':
                 self.win.blit(self.rightFig[self.walkCount // 2], (self.x, self.y))
                 self.walkCount += 1
-            elif self.currDir is 'Up':
+            elif self.currDir is 'Up' and self.voidDir is not 'Up':
                 self.win.blit(self.upFig[self.walkCount // 2], (self.x, self.y))
                 self.walkCount += 1
-            elif self.currDir is 'Down':
+            elif self.currDir is 'Down' and self.voidDir is not 'Down':
                 self.win.blit(self.downFig[self.walkCount // 2], (self.x, self.y))
                 self.walkCount += 1
         # else:
@@ -56,19 +58,6 @@ class Mishkar(object):
             if self.facing is 'Down':
                 self.win.blit(self.downFig[0], (self.x, self.y))
 
-        else:
-            if self.currDir is 'Left':
-                self.win.blit(self.leftFig[self.walkCount // len(self.leftFig)], (self.x, self.y))
-                self.walkCount += 1
-            elif self.currDir is 'Right':
-                self.win.blit(self.rightFig[self.walkCount // len(self.leftFig)], (self.x, self.y))
-                self.walkCount += 1
-            elif self.currDir is 'Up':
-                self.win.blit(self.upFig[self.walkCount // len(self.leftFig)], (self.x, self.y))
-                self.walkCount += 1
-            elif self.currDir is 'Down':
-                self.win.blit(self.downFig[self.walkCount // len(self.leftFig)], (self.x, self.y))
-                self.walkCount += 1
 
         self.collision_box = Rect(self.x+12, self.y+5, 38, 60)
         hit_box = self.collision_box.get_rect()
@@ -76,7 +65,7 @@ class Mishkar(object):
 
     def movement(self, keyPressed):
 
-        if keyPressed[pygame.K_LEFT]:
+        if keyPressed[pygame.K_LEFT] and self.voidDir is not 'Left':
             self.x -= self.vel
             self.currDir = 'Left'
             self.facing = 'Left'
@@ -99,5 +88,14 @@ class Mishkar(object):
         else:
             self.currDir = 'Stand'
 
-    def interact(self):
-        pass
+    def interact(self, object, keyPressed):
+        if GameFunctions.isCollisionCollisionBox(self, object):
+            if keyPressed[pygame.K_x]:
+                object.pickUpItem()
+
+        else:
+            if keyPressed[pygame.K_z] and object.inInventory:
+                object.dropItem(self.getCollisionBox().x, self.collision_box.y)
+
+    def getCollisionBox(self):
+        return self.collision_box
