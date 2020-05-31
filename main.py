@@ -6,6 +6,7 @@ import time
 import GameFunctions
 from Item import Item
 from Mishkar import Mishkar
+from Townie import Townie
 from Beasts import Beasts
 
 pygame.init()
@@ -19,6 +20,7 @@ pygame.display.set_caption("Mishkar The Germaphobe")
 
 run = True
 Mishkar = Mishkar(300, 300, 50, 50, GameFunctions.loadImages('MishkarBests/CharSprites/MishkarSprite'), win)
+Fredrick = Townie(600, 400, 50, 50, GameFunctions.loadImages('MishkarBests/CharSprites/SheepMenSprites'), win)
 # Apple = Item(100, 300, 512, 256, "MishkarBests/unicorn.png", "apple", win)
 tmx_data = load_pygame("Maps/MishkarBG.tmx")
 
@@ -35,6 +37,7 @@ def redrawGameWindow():
             if tile is not None:
                 win.blit(tile, (x * tmx_data.tilewidth, y * tmx_data.tileheight))
     Mishkar.draw()
+    Fredrick.draw()
     # Apple.draw()
     pygame.display.update()
 
@@ -52,6 +55,7 @@ while run:
         break
 
     Mishkar.movement(keys)
+    Fredrick.movement()
 
     redrawGameWindow()
 
