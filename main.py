@@ -3,7 +3,6 @@ from pytmx import load_pygame
 import random
 import time
 
-import GameFunctions
 from Item import Item
 from Mishkar import Mishkar
 from Beasts import Beasts
@@ -26,8 +25,6 @@ image = tmx_data.get_tile_image(0, 0, 0)
 
 
 Mishkar.existance()
-
-
 
 
 def redrawGameWindow():

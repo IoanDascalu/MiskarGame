@@ -18,6 +18,7 @@ class Mishkar(object):
         self.up = False
         self.down = False
         self.standing = True
+        self.collision_box = Rect(self.x, self.y - 2, 37, 55)
         self.walkCount = 0
         self.collisionbox = (self.x, self.y - 2, 37, 55)
         print(listOfFigures[1])
@@ -28,7 +29,6 @@ class Mishkar(object):
 
     def existance(self):
         print("I exist")
-
 
     def inventory(self):
         pass
@@ -73,8 +73,8 @@ class Mishkar(object):
             elif self.down:
                 self.win.blit(self.downFig[self.walkCount // len(self.leftFig)], (self.x, self.y))
                 self.walkCount += 1
-        self.collisionbox = (self.x, self.y - 2, 37, 55)
-        pygame.draw.rect(self.win, (255, 0, 0), self.collisionbox, 2)
+            self.collision_box = (self.x, self.y - 2, 37, 55)
+            pygame.draw.rect(self.win, (255, 0, 0), self.collision_box, 2)
 
     def movement(self, keyPressed):
 
