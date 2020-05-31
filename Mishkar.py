@@ -12,7 +12,7 @@ class Mishkar(object):
         self.height = height
         self.win = window
         self.health = 100
-        self.vel=5
+        self.vel = 5
         # self.inventory = Item.Item("MishkarBests/unicorn.png", "unicorn")
         self.left = True
         self.right = False
@@ -22,7 +22,7 @@ class Mishkar(object):
         self.collision_box = Rect(self.x, self.y - 2, 37, 55)
         self.walkCount = 0
         self.collisionbox = (self.x, self.y - 2, 37, 55)
-        print(listOfFigures[1])
+        print(listOfFigures[0])
         self.downFig = [pygame.image.load(img) for img in listOfFigures[0]]
         self.upFig = [pygame.image.load(img) for img in listOfFigures[1]]
         self.leftFig = [pygame.image.load(img) for img in listOfFigures[2]]
@@ -109,7 +109,6 @@ class Mishkar(object):
             self.standing = False
         else:
             self.standing = True
-
 
     def interact(self):
         pass
