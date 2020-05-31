@@ -19,9 +19,8 @@ class Mishkar(object):
         self.up = False
         self.down = False
         self.standing = True
-        self.collision_box = Rect(self.x, self.y - 2, 37, 55)
+        self.collision_box = Rect(self.x+12, self.y+5, 38, 60)
         self.walkCount = 0
-        self.collisionbox = (self.x, self.y - 2, 37, 55)
         self.downFig = [pygame.image.load(img) for img in listOfFigures[0]]
         self.upFig = [pygame.image.load(img) for img in listOfFigures[1]]
         self.leftFig = [pygame.image.load(img) for img in listOfFigures[2]]
@@ -73,8 +72,9 @@ class Mishkar(object):
             elif self.down:
                 self.win.blit(self.downFig[self.walkCount // len(self.leftFig)], (self.x, self.y))
                 self.walkCount += 1
-            self.collision_box = (self.x, self.y - 2, 37, 55)
-            pygame.draw.rect(self.win, (255, 0, 0), self.collision_box, 2)
+        self.collision_box = Rect(self.x+12, self.y+5, 38, 60)
+        hit_box = self.collision_box.get_rect()
+        pygame.draw.rect(self.win, (255, 0, 0), hit_box, 2)
 
     def movement(self, keyPressed):
 

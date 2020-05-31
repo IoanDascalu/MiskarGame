@@ -45,6 +45,9 @@ class Rect:
 
         return [point1, point2, point3, point4]
 
+    def get_rect(self):
+        return [self.x, self.y, self.width, self.height]
+
 
 def isCollision(object1, object2):
     '''

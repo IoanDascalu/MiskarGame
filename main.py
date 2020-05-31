@@ -18,7 +18,7 @@ clock = pygame.time.Clock()
 pygame.display.set_caption("Mishkar The Germaphobe")
 
 run = True
-Mishkar = Mishkar(100, 100, 50, 50, GameFunctions.loadImages('MishkarBests/CharSprites/MishkarSprite'), win)
+Mishkar = Mishkar(300, 300, 50, 50, GameFunctions.loadImages('MishkarBests/CharSprites/MishkarSprite'), win)
 # Apple = Item(100, 300, 512, 256, "MishkarBests/unicorn.png", "apple", win)
 tmx_data = load_pygame("Maps/MishkarBG.tmx")
 
