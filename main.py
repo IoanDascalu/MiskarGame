@@ -1,4 +1,5 @@
 import pygame
+from pytmx import load_pygame
 import random
 import time
 
@@ -8,8 +9,8 @@ from Beasts import Beasts
 
 pygame.init()
 
-screenWidth = 700
-screenHeight = 700
+screenWidth = 800
+screenHeight = 800
 win = pygame.display.set_mode((screenWidth, screenHeight))
 clock = pygame.time.Clock()
 
@@ -17,16 +18,25 @@ pygame.display.set_caption("Mishkar The Germaphobe")
 
 run = True
 Mishkar = Mishkar(100, 100, 50, 50, win)
-Apple = Item(100, 300, 512, 256, "MishkarBests/unicorn.png", "apple", win)
+# Apple = Item(100, 300, 512, 256, "MishkarBests/unicorn.png", "apple", win)
+tmx_data = load_pygame("Maps/MishkarBG.tmx")
+
+image = tmx_data.get_tile_image(0, 0, 0)
 
 
 Mishkar.existance()
 
 
 def redrawGameWindow():
+    for layer in tmx_data.visible_layers:
+        for x, y, gid, in layer:
+            tile = tmx_data.get_tile_image_by_gid(gid)
+            if tile is not None:
+                win.blit(tile, (x * tmx_data.tilewidth, y * tmx_data.tileheight))
     Mishkar.draw()
-    Apple.draw()
+    # Apple.draw()
     pygame.display.update()
+
 
 while run:
     clock.tick(60)
@@ -41,7 +51,5 @@ while run:
     Mishkar.movement(keys)
 
     redrawGameWindow()
-
-
 
 pygame.quit()
