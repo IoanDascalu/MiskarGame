@@ -107,5 +107,5 @@ class Townie(object):
             self.stepCount -= 1
             self.currDir = 'Stand'
 
-    def interact(self):
-        pass
+    def getCollisionBox(self):
+        return self.collision_box
