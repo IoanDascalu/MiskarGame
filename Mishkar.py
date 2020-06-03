@@ -13,7 +13,7 @@ class Mishkar(object):
         self.height = height
         self.win = window
         self.health = 100
-        self.vel = 5
+        self.vel = 10
         # self.inventory = Item.Item("MishkarBests/unicorn.png", "unicorn")
         self.collision_box = Rect(self.x+12, self.y+5, 38, 60)
         self.walkCount = 0

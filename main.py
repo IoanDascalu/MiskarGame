@@ -8,8 +8,11 @@ from Item import Item
 from Mishkar import Mishkar
 from Townie import Townie
 from Beasts import Beasts
+import pygame.freetype
 
 pygame.init()
+pygame.freetype.init()
+GAME_FONT = pygame.freetype.SysFont(pygame.font.get_default_font(), 30)
 
 screenWidth = 800
 screenHeight = 800
@@ -25,7 +28,6 @@ Bucket = Item(500, 500, 32, 32, 'MishkarBests/GameSprites/bucket/WaterBucket.png
 tmx_data = load_pygame("Maps/MishkarBG.tmx")
 
 image = tmx_data.get_tile_image(0, 0, 0)
-
 
 Mishkar.existance()
 
@@ -57,14 +59,20 @@ while run:
 
     Mishkar.interact(Bucket, keys)
     Mishkar.updateDir(keys)
-    collision, rect2b1, rect2b2 = GameFunctions.collisionToBeCollisionBox(Mishkar, Fredrick)
+    collision = GameFunctions.collisionToBeCollisionBox(Mishkar, Fredrick)
+    spotted = GameFunctions.isTriangleCollision(Mishkar.getCollisionBox(), Fredrick)
+
     if collision:
         Mishkar.voidDir = Mishkar.facing
         Fredrick.voidDir = Fredrick.facing
     else:
         Mishkar.voidDir = ''
         Fredrick.voidDir = ''
-
+    if spotted:
+        GAME_FONT.render_to(win, (40, 350), 'YOU LOST MOTHERFUCKER', (255, 0, 0))
+        print("hit...")
+        pygame.time.wait(3000)
+        break
     Mishkar.movement(keys)
     Fredrick.movement()
 

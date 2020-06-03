@@ -251,7 +251,7 @@ def collisionToBeCollisionBox(object1, object2):
     # pygame.display.update()
 
     # object1.collision_box = rect2b1
-    return isCollision(rect2b1, rect2b2), rect2b1, rect2b2
+    return isCollision(rect2b1, rect2b2)
 
 
 def isTriangleCollision(object1, object2):
@@ -329,7 +329,7 @@ def isTriangleCollision(object1, object2):
 
     hitbox = object1 #.collision_box
     hitbox_points = hitbox.get_points()
-    tri_points = object2.get_points()
+    tri_points = object2.triangle.get_points()
     for point in hitbox_points:
         x = point[0]
         y = point[1]
