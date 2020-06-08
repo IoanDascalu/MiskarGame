@@ -14,6 +14,7 @@ pygame.init()
 pygame.freetype.init()
 GAME_FONT = pygame.freetype.SysFont(pygame.font.get_default_font(), 30)
 
+
 screenWidth = 800
 screenHeight = 800
 win = pygame.display.set_mode((screenWidth, screenHeight))
@@ -22,6 +23,7 @@ clock = pygame.time.Clock()
 pygame.display.set_caption("Mishkar The Germaphobe")
 
 run = True
+youLost = False
 Mishkar = Mishkar(300, 300, 38, 60, GameFunctions.loadImages('MishkarBests/CharSprites/MishkarSprite'), win)
 Fredrick = Townie(400, 400, 36, 58, GameFunctions.loadImages('MishkarBests/CharSprites/SheepMenSprites'), win)
 Bucket = Item(500, 500, 32, 32, 'MishkarBests/GameSprites/bucket/WaterBucket.png', 'Bucket', win)
@@ -42,6 +44,9 @@ def redrawGameWindow():
     Fredrick.draw()
 
     Mishkar.draw()
+    if youLost:
+        GAME_FONT.render_to(win, (40, 350), 'YOU LOST MOTHERFUCKER', (255, 0, 0))
+
     pygame.display.update()
 
 
@@ -57,6 +62,10 @@ while run:
     if keys[pygame.K_ESCAPE]:
         break
 
+    if youLost:
+        pygame.time.wait(3000)
+        break
+
     Mishkar.interact(Bucket, keys)
     Mishkar.updateDir(keys)
     collision = GameFunctions.collisionToBeCollisionBox(Mishkar, Fredrick)
@@ -69,10 +78,8 @@ while run:
         Mishkar.voidDir = ''
         Fredrick.voidDir = ''
     if spotted:
-        GAME_FONT.render_to(win, (40, 350), 'YOU LOST MOTHERFUCKER', (255, 0, 0))
+        youLost = True
         print("hit...")
-        pygame.time.wait(3000)
-        break
     Mishkar.movement(keys)
     Fredrick.movement()
 
