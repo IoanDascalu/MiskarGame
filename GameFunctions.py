@@ -48,6 +48,7 @@ class Rect:
     def get_rect(self):
         return [self.x, self.y, self.width, self.height]
 
+
 class Triangle:
     def __init__(self, x, y, width, height, facing):
         self.x = x
@@ -59,17 +60,17 @@ class Triangle:
     def get_points(self):
         point1 = (self.x, self.y)
         if self.facing is "Up":
-            point2 = (self.x - self.width/2, self.y - self.height)
-            point3 = (self.x + self.width/2, self.y - self.height)
+            point2 = (self.x - self.width / 2, self.y - self.height)
+            point3 = (self.x + self.width / 2, self.y - self.height)
         if self.facing is "Down":
-            point2 = (self.x + self.width/2, self.y + self.height)
-            point3 = (self.x - self.width/2, self.y + self.height)
+            point2 = (self.x + self.width / 2, self.y + self.height)
+            point3 = (self.x - self.width / 2, self.y + self.height)
         if self.facing is "Left":
-            point2 = (self.x - self.height, self.y + self.width/2)
-            point3 = (self.x - self.height, self.y - self.width/2)
+            point2 = (self.x - self.height, self.y + self.width / 2)
+            point3 = (self.x - self.height, self.y - self.width / 2)
         if self.facing is "Right":
-            point2 = (self.x + self.height, self.y - self.width/2)
-            point3 = (self.x + self.height, self.y + self.width/2)
+            point2 = (self.x + self.height, self.y - self.width / 2)
+            point3 = (self.x + self.height, self.y + self.width / 2)
 
         return [point1, point2, point3]
 
@@ -124,8 +125,10 @@ def isCollisionCollisionBox(object1, object2):
     '''
 
     collision = False
-    rect1 = Rect(object1.getCollisionBox().x, object1.getCollisionBox().y, object1.getCollisionBox().width, object1.getCollisionBox().height)
-    rect2 = Rect(object2.getCollisionBox().x, object2.getCollisionBox().y, object2.getCollisionBox().width, object2.getCollisionBox().height)
+    rect1 = Rect(object1.getCollisionBox().x, object1.getCollisionBox().y, object1.getCollisionBox().width,
+                 object1.getCollisionBox().height)
+    rect2 = Rect(object2.getCollisionBox().x, object2.getCollisionBox().y, object2.getCollisionBox().width,
+                 object2.getCollisionBox().height)
     rp1 = rect1.get_points()
     rp2 = rect2.get_points()
 
@@ -174,7 +177,7 @@ def collisionToBe(object1, object2):
                            object1.width, object1.height)
         if object2.currDir is "Right":
             rect2b1 = Rect(object1.x, object1.y,
-                           object1.width  + object1.vel, object1.height)
+                           object1.width + object1.vel, object1.height)
 
     else:
         rect2b1 = Rect(object1.x, object1.y,
@@ -262,21 +265,21 @@ def isTriangleCollision(object1, object2):
     :return:
     '''
 
-    hitbox = object1 #.collision_box
+    hitbox = object1  # .collision_box
     hitbox_points = hitbox.get_points()
     tri_points = object2.get_points()
     for point in hitbox_points:
         x = point[0]
         y = point[1]
-        line1_slope = (tri_points[1][1]-tri_points[0][1])/\
-                      (tri_points[1][0]-tri_points[0][0])
-        line2_slope = (tri_points[2][1]-tri_points[0][1])/\
-                      (tri_points[2][0]-tri_points[0][0])
+        line1_slope = (tri_points[1][1] - tri_points[0][1]) / \
+                      (tri_points[1][0] - tri_points[0][0])
+        line2_slope = (tri_points[2][1] - tri_points[0][1]) / \
+                      (tri_points[2][0] - tri_points[0][0])
 
         if object2.currDir is "Up":
             if tri_points[1][1] <= y <= tri_points[0][1]:
-                x_min = (y - tri_points[0][1])/line1_slope + tri_points[0][0]
-                x_max = (y - tri_points[0][1])/line2_slope + tri_points[0][0]
+                x_min = (y - tri_points[0][1]) / line1_slope + tri_points[0][0]
+                x_max = (y - tri_points[0][1]) / line2_slope + tri_points[0][0]
                 if x_min <= x <= x_max:
                     return True
             for tri_point in tri_points:
@@ -318,6 +321,7 @@ def isTriangleCollision(object1, object2):
                     return True
 
     return False
+
 
 def isTriangleCollision(object1, object2):
     '''
@@ -327,21 +331,21 @@ def isTriangleCollision(object1, object2):
     :return:
     '''
 
-    hitbox = object1 #.collision_box
+    hitbox = object1  # .collision_box
     hitbox_points = hitbox.get_points()
     tri_points = object2.triangle.get_points()
     for point in hitbox_points:
         x = point[0]
         y = point[1]
-        line1_slope = (tri_points[1][1]-tri_points[0][1])/\
-                      (tri_points[1][0]-tri_points[0][0])
-        line2_slope = (tri_points[2][1]-tri_points[0][1])/\
-                      (tri_points[2][0]-tri_points[0][0])
+        line1_slope = (tri_points[1][1] - tri_points[0][1]) / \
+                      (tri_points[1][0] - tri_points[0][0])
+        line2_slope = (tri_points[2][1] - tri_points[0][1]) / \
+                      (tri_points[2][0] - tri_points[0][0])
 
         if object2.currDir is "Up":
             if tri_points[1][1] <= y <= tri_points[0][1]:
-                x_min = (y - tri_points[0][1])/line1_slope + tri_points[0][0]
-                x_max = (y - tri_points[0][1])/line2_slope + tri_points[0][0]
+                x_min = (y - tri_points[0][1]) / line1_slope + tri_points[0][0]
+                x_max = (y - tri_points[0][1]) / line2_slope + tri_points[0][0]
                 if x_min <= x <= x_max:
                     return True
             for tri_point in tri_points:
@@ -383,3 +387,37 @@ def isTriangleCollision(object1, object2):
                     return True
 
     return False
+
+
+class button():
+    def __init__(self, color, x, y, width, height, text=''):
+        self.color = color
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.text = text
+        self.visible = False
+
+    def draw(self, win, outline=None):
+        if self.visible:
+            # Call this method to draw the button on the screen
+            if outline:
+                pygame.draw.rect(win, outline, (self.x - 2, self.y - 2, self.width + 4, self.height + 4), 0)
+
+            pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.height), 0)
+
+            if self.text != '':
+                font = pygame.font.SysFont('comicsans', 60)
+                text = font.render(self.text, 1, (0, 0, 0))
+                win.blit(text, (
+                    self.x + (self.width / 2 - text.get_width() / 2),
+                    self.y + (self.height / 2 - text.get_height() / 2)))
+
+    def isOver(self, pos):
+        # Pos is the mouse position or a tuple of (x,y) coordinates
+        if self.x < pos[0] < self.x + self.width:
+            if self.y < pos[1] < self.y + self.height:
+                return True
+
+        return False
