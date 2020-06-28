@@ -105,7 +105,7 @@ while run:
     Mishkar.interact(Bucket, keys)
     Mishkar.updateDir(keys)
     collision = GameFunctions.collisionToBeCollisionBox(Mishkar, Fredrick)
-    spotted = GameFunctions.isTriangleCollision(Mishkar.getCollisionBox(), Fredrick)
+    spotted = GameFunctions.isTriangleCollision(Mishkar, Fredrick)
 
     if collision:
         Mishkar.voidDir = Mishkar.facing

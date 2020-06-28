@@ -15,7 +15,7 @@ class Townie(object):
         self.width = width
         self.height = height
         self.win = window
-        self.vel = 0
+        self.vel = 3
         self.collision_box = Rect(self.x+30, self.y+5, 38, 60)
         self.walkCount = 0
         self.facing = 'Down'
@@ -81,7 +81,7 @@ class Townie(object):
             # if not GameFunctions.collisionToBe(self, Mishkar)
             pass
         else:
-            self.stepCount = random.randrange(10, 30)
+            self.stepCount = random.randrange(30, 50)
             ranDir = random.randrange(0,5)
             possibleDir = ['Left', 'Right', 'Up', 'Down', 'Stand']
             self.currDir = possibleDir[ranDir]
