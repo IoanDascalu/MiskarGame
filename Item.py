@@ -31,9 +31,8 @@ class Item(object):
             self.y = 700
         self.win.blit(self.image, (self.x, self.y))
         self.collision_box = Rect(self.x, self.y, 32, 32)
-        hit_box = self.collision_box.get_rect()
+        # hit_box = self.collision_box.get_rect()
         # pygame.draw.rect(self.win, (255, 0, 0), hit_box, 2)
-
 
     def getCollisionBox(self):
         return self.collision_box

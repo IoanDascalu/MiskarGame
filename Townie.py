@@ -15,7 +15,7 @@ class Townie(object):
         self.width = width
         self.height = height
         self.win = window
-        self.vel = 3
+        self.vel = 0
         self.collision_box = Rect(self.x+30, self.y+5, 38, 60)
         self.walkCount = 0
         self.facing = 'Down'
