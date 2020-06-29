@@ -50,7 +50,7 @@ tmx_data = load_pygame("Maps/MishkarBG.tmx")
 #
 # Mishkar, Fredrick, Bucket, tmx_data = loadLevel(1)
 
-retryButton = GameFunctions.button((255, 0, 0), 350, 600, 200, 50, "Retry")
+retryButton = GameFunctions.Button((255, 0, 0), 350, 600, 200, 50, "Retry")
 
 
 image = tmx_data.get_tile_image(0, 0, 0)
@@ -68,6 +68,7 @@ def redrawGameWindow():
     Fredrick.draw()
 
     Mishkar.draw()
+    #pygame.draw.rect(win, (255, 0, 0), (260, 150, 500, 430), 4)
     retryButton.draw(win, (0, 0, 0))
     if youLost:
         GAME_FONT.render_to(win, (40, 350), 'YOU LOST', (255, 0, 0))
@@ -102,23 +103,24 @@ while run:
         pass
         #pygame.time.wait(1000)
 
+    boundary = GameFunctions.Rect(260, 150, 500, 430)
+
     Mishkar.interact(Bucket, keys)
     Mishkar.updateDir(keys)
-    collision = GameFunctions.collisionToBeCollisionBox(Mishkar, Fredrick)
+    voidDirs1, voidDirs2 = GameFunctions.collisionToBeCollisionBox(Mishkar, Fredrick)
+    voidDirs3 = GameFunctions.inBoundary(boundary, Mishkar)
+    voidDirs4 = GameFunctions.inBoundary(boundary, Fredrick)
+    for item in voidDirs3:
+        voidDirs1.append(item)
+    for item in voidDirs4:
+        voidDirs2.append(item)
     spotted = GameFunctions.isTriangleCollision(Mishkar, Fredrick)
 
-    if collision:
-        Mishkar.voidDir = Mishkar.facing
-        Fredrick.voidDir = Fredrick.facing
-    else:
-        Mishkar.voidDir = ''
-        Fredrick.voidDir = ''
     if spotted:
         retryButton.visible = True
         youLost = True
-        print("hit...")
-    Mishkar.movement(keys)
-    Fredrick.movement()
+    Mishkar.movement(keys, voidDirs1)
+    Fredrick.movement(voidDirs2)
 
     redrawGameWindow()
 

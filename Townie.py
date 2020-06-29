@@ -15,18 +15,17 @@ class Townie(object):
         self.width = width
         self.height = height
         self.win = window
-        self.vel = 2
+        self.vel = 3
         self.collision_box = Rect(self.x+30, self.y+5, 38, 60)
         self.walkCount = 0
         self.facing = 'Down'
         self.currDir = 'Stand'
-        self.voidDir = ''
         self.downFig = [pygame.image.load(img) for img in listOfFigures[0]]
         self.upFig = [pygame.image.load(img) for img in listOfFigures[1]]
         self.leftFig = [pygame.image.load(img) for img in listOfFigures[2]]
         self.rightFig = [pygame.image.load(img) for img in listOfFigures[3]]
         self.stepCount = 0
-        self.triangle_offset = (23,18)
+        self.triangle_offset = (23, 18)
         self.triangle = Triangle(self.x + self.triangle_offset[0], self.y + self.triangle_offset[0], 30, 200, self.facing)
 
     def draw(self):
@@ -75,37 +74,37 @@ class Townie(object):
         pygame.draw.polygon(self.win, (255, 255, 255), self.triangle.get_points(), 0)
         # pygame.draw.rect(self.win, (255, 0, 0), hit_box, 2)
 
-    def movement(self):
+    def movement(self, voidDirections):
 
         if self.stepCount != 0:
             # if not GameFunctions.collisionToBe(self, Mishkar)
             pass
         else:
             self.stepCount = random.randrange(30, 50)
-            ranDir = random.randrange(0,5)
+            ranDir = random.randrange(0, 5)
             possibleDir = ['Left', 'Right', 'Up', 'Down', 'Stand']
             self.currDir = possibleDir[ranDir]
 
-        if self.currDir is 'Left' and self.voidDir is not 'Left':
+        if self.currDir is 'Left' and 'Left' not in voidDirections:
             self.stepCount -= 1
             self.x -= self.vel
             self.facing = 'Left'
             self.triangle.movement_update(self.x + self.triangle_offset[0], self.y + self.triangle_offset[1],
                                           self.facing)
 
-        elif self.currDir is 'Right' and self.voidDir is not 'Right':
+        elif self.currDir is 'Right' and 'Right' not in voidDirections:
             self.stepCount -= 1
             self.x += self.vel
             self.facing = 'Right'
             self.triangle.movement_update(self.x + self.triangle_offset[0], self.y + self.triangle_offset[1],
                                           self.facing)
-        elif self.currDir is 'Up' and self.voidDir is not 'Up':
+        elif self.currDir is 'Up' and 'Up' not in voidDirections:
             self.stepCount -= 1
             self.y -= self.vel
             self.facing = 'Up'
             self.triangle.movement_update(self.x + self.triangle_offset[0], self.y + self.triangle_offset[1],
                                           self.facing)
-        elif self.currDir is 'Down' and self.voidDir is not 'Down':
+        elif self.currDir is 'Down' and 'Down' not in voidDirections:
             self.stepCount -= 1
             self.y += self.vel
             self.facing = 'Down'
@@ -116,5 +115,6 @@ class Townie(object):
             self.currDir = 'Stand'
             self.triangle.movement_update(self.x + self.triangle_offset[0], self.y + self.triangle_offset[1],
                                           self.facing)
+
     def getCollisionBox(self):
         return self.collision_box
