@@ -25,30 +25,9 @@ run = True
 youLost = False
 Mishkar = Mishkar(300, 300, 38, 60, GameFunctions.loadImages('MishkarBests/CharSprites/MishkarSprite'), win)
 Fredrick = Townie(400, 400, 36, 58, GameFunctions.loadImages('MishkarBests/CharSprites/SheepMenSprites'), win)
+Reiny = Beasts(600, 500, 50, 50, GameFunctions.loadImages('MishkarBests/CharSprites/GoldenReindeerSprites'), win)
 Bucket = Item(500, 500, 32, 32, 'MishkarBests/GameSprites/bucket/WaterBucket.png', 'Bucket', win)
 tmx_data = load_pygame("Maps/MishkarBG.tmx")
-
-
-# def loadLevel(levelInt):
-#     if levelInt is 1:
-#         mishkar = Mishkar(300, 300, 38, 60, GameFunctions.loadImages('MishkarBests/CharSprites/MishkarSprite'), win)
-#         Fredrick = Townie(400, 400, 36, 58, GameFunctions.loadImages('MishkarBests/CharSprites/SheepMenSprites'), win)
-#         Bucket = Item(500, 500, 32, 32, 'MishkarBests/GameSprites/bucket/WaterBucket.png', 'Bucket', win)
-#         tmx_data = load_pygame("Maps/MishkarBG.tmx")
-#     elif levelInt is 2:
-#         mishkar = Mishkar(600, 600, 38, 60, GameFunctions.loadImages('MishkarBests/CharSprites/MishkarSprite'), win)
-#         Fredrick = Townie(400, 400, 36, 58, GameFunctions.loadImages('MishkarBests/CharSprites/SheepMenSprites'), win)
-#         Bucket = Item(500, 500, 32, 32, 'MishkarBests/GameSprites/bucket/WaterBucket.png', 'Bucket', win)
-#         tmx_data = load_pygame("Maps/MishkarBG.tmx")
-#     else:
-#         mishkar = Mishkar(300, 300, 38, 60, GameFunctions.loadImages('MishkarBests/CharSprites/MishkarSprite'), win)
-#         Fredrick = Townie(400, 400, 36, 58, GameFunctions.loadImages('MishkarBests/CharSprites/SheepMenSprites'), win)
-#         Bucket = Item(500, 500, 32, 32, 'MishkarBests/GameSprites/bucket/WaterBucket.png', 'Bucket', win)
-#         tmx_data = load_pygame("Maps/MishkarBG.tmx")
-#     return mishkar, Fredrick, Bucket, tmx_data
-#
-#
-# Mishkar, Fredrick, Bucket, tmx_data = loadLevel(1)
 
 retryButton = GameFunctions.Button((255, 0, 0), 350, 600, 200, 50, "Retry")
 
@@ -66,8 +45,10 @@ def redrawGameWindow():
                 win.blit(tile, (x * tmx_data.tilewidth, y * tmx_data.tileheight))
     Bucket.draw()
     Fredrick.draw()
+    Reiny.draw()
 
     Mishkar.draw()
+
     #pygame.draw.rect(win, (255, 0, 0), (260, 150, 500, 430), 4)
     retryButton.draw(win, (0, 0, 0))
     if youLost:
@@ -110,6 +91,7 @@ while run:
     voidDirs1, voidDirs2 = GameFunctions.collisionToBeCollisionBox(Mishkar, Fredrick)
     voidDirs3 = GameFunctions.inBoundary(boundary, Mishkar)
     voidDirs4 = GameFunctions.inBoundary(boundary, Fredrick)
+    voidDirs5 = GameFunctions.inBoundary(boundary, Reiny)
     for item in voidDirs3:
         voidDirs1.append(item)
     for item in voidDirs4:
@@ -121,6 +103,7 @@ while run:
         youLost = True
     Mishkar.movement(keys, voidDirs1)
     Fredrick.movement(voidDirs2)
+    Reiny.movement(voidDirs5)
 
     redrawGameWindow()
 

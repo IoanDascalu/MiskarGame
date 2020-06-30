@@ -2,8 +2,6 @@ import pygame
 import Item
 import random
 from GameFunctions import Triangle
-import pygame
-import Item
 from GameFunctions import Rect
 
 
