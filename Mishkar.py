@@ -23,6 +23,7 @@ class Mishkar(object):
         self.upFig = [pygame.image.load(img) for img in listOfFigures[1]]
         self.leftFig = [pygame.image.load(img) for img in listOfFigures[2]]
         self.rightFig = [pygame.image.load(img) for img in listOfFigures[3]]
+        self.health = 100
 
     def existance(self):
         print("I exist")

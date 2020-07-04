@@ -50,6 +50,8 @@ def redrawGameWindow():
     Mishkar.draw()
 
     #pygame.draw.rect(win, (255, 0, 0), (260, 150, 500, 430), 4)
+    pygame.draw.rect(win, (255, 0, 0), (600, 700, 160, 30), 2)
+    GAME_FONT.render_to(win, (640, 705), 'Health', (0, 0, 0))
     retryButton.draw(win, (0, 0, 0))
     if youLost:
         GAME_FONT.render_to(win, (40, 350), 'YOU LOST', (255, 0, 0))

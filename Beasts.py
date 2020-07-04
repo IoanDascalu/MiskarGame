@@ -21,6 +21,7 @@ class Beasts(object):
         self.leftFig = [pygame.image.load(img) for img in listOfFigures[2]]
         self.rightFig = [pygame.image.load(img) for img in listOfFigures[3]]
         self.stepCount = 0
+        self.rampage = True
 
     def draw(self):
         if self.walkCount + 1 >= 30:
