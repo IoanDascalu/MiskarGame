@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# User Defined Ignore
+.DS_Store
+.idea/
+
 # C extensions
 *.so
 
