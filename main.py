@@ -71,6 +71,7 @@ while run:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if retryButton.isOver(pos) and retryButton.visible:
                 retryButton.visible = False
+                youLost = False
 
         if event.type == pygame.MOUSEMOTION:
             if retryButton.isOver(pos) and retryButton.visible:
